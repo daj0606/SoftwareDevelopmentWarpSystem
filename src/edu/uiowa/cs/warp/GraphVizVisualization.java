@@ -29,7 +29,6 @@ public class GraphVizVisualization extends Visualization {
    *
    */
 
-  private static final String EMPTY = "";
   private static final String GRAPH_VIZ_SUFFIX = ".gv";
   private static final String TITLE = "WorkLoad as Di-Graph";
 

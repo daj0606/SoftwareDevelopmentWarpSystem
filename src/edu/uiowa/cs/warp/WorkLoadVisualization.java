@@ -24,6 +24,11 @@ public class WorkLoadVisualization extends Visualization {
     super(options, INPUT_FILE_SUFFIX); // Visualization constructor
     inputFileName = options.getInputFileName();
     initialize(inputFileName);
+    /* clear the default name extension because the workload description
+     * is independent of reliability parameters or the scheduler used
+     * to create a program.
+     */
+    setNameExtension(EMPTY);
   }
 
   @Override

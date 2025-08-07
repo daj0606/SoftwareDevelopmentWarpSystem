@@ -207,6 +207,7 @@ public class Warp {
     	  for (ScheduleChoices sch : ScheduleChoices.values()) {
     		  /* set the scheduler and then create the corresponding Warp System */
     		  warpOptions.setSchedulerSelected(sch.name());
+    		  workLoad = new WorkLoad(warpOptions);
     		  warp = new WarpSystem(workLoad);
     		  /* Now create all visualizations using the Factory */
     		  VisualizationFactory.createWarpVisualizations(warp);

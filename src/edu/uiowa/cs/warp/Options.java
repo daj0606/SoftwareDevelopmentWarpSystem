@@ -599,7 +599,7 @@ public class Options {
     parser.addOption("-f, --faults %d {[0,10]} #number of faults per edge in a flow (per period)",
         faults);
     parser.addOption("-gui %v #use the Graphical User Interface (GUI)", gui);
-    parser.addOption("-d, --display %v #create a display visualizations", display);
+    parser.addOption("-d, --display %v #create a display window for visualizations", display);
     parser.addOption("-sf %f {[0.5,4.0]} #font scale factor for GUI", // (1.0 => no scale)",
             fontScaler);
     parser.addOption("-gv %v #create a graph visualization (.gv) file for GraphViz", gv);

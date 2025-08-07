@@ -24,6 +24,11 @@ public class SensorNetworkVisualization extends Visualization {
     super(workLoad, ".sn");
     this.workLoad = workLoad;
     warpGraph = new WarpGraph(workLoad);
+    /* clear the default name extension because the sensor network 
+     * description is independent of reliability parameters or the 
+     * scheduler used to create a program.
+     */
+    setNameExtension(EMPTY);
   }
 
   @Override
