@@ -8,6 +8,7 @@ hack, and it needs a lot of cleanup and refactoring. A perfect code base to teac
 the value of software developement fundamentals!
 <br>
 This latest version (2.0) contains a full Graphical User Interface (GUI) and 
-updatd windows for displaying reports and tables. This version has also undergone
-signficant refactoring of GUI-related code, Warp.java, and the factory classes.
+updated windows for displaying reports, tables, and GraphStream graphs. This 
+version has also undergone signficant refactoring of GUI-related code, Warp.java, 
+and the factory classes.
 <br>
