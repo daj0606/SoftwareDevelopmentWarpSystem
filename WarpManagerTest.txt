@@ -1,0 +1,4 @@
+WarpManagerTest {
+Fwarp (1, 10, 10, 0): A -> Foo -> Bar
+Flow2 (5, 20 20, 0): green -> red -> blue -> sink
+}
