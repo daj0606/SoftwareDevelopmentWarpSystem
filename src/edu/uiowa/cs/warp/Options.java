@@ -492,6 +492,7 @@ public class Options {
   }
  
   private void setDefaultOptions () {
+    this.verboseMode = false;
     this.nChannels = NUM_CHANNELS;
     this.minPacketReceptionRate = MIN_PACKET_RECEPTION_RATE;
     this.e2e = E2E;
