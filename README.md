@@ -12,3 +12,6 @@ updated windows for displaying reports, tables, and GraphStream graphs. This
 version has also undergone signficant refactoring of GUI-related code, Warp.java, 
 and the factory classes.
 <br>
+Remember to add the scheduler to all --all configurations to control data output.
+
+

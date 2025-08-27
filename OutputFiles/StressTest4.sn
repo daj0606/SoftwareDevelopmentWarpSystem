@@ -1,0 +1,4 @@
+Sensor Network for StressTest4
+Nodes: A B C D E F G H I J K L
+Edges: (A,B) (B,C) (C,D) (D,E) (E,F) (E,J) (F,G) (G,H) (H,I) (J,K) (K,L)
+
