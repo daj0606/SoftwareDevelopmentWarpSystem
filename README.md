@@ -1,4 +1,7 @@
 # CS2820 Fall 2025 WARP Project Code
+
+This is Benjamin Kleiman's version of WARP that will be used for CS:2820 in the year 2025.
+
 This version 2.0 code base will be used for the University of Iowa 
 CS 2820 Introduction to Software Development course. The code was 
 developed by Steve Goddard for the WARP sensor network research project. 

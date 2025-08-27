@@ -1,0 +1,14 @@
+/* 
+ * Graph Example
+ *    Flow F0:  A  -> B  -> C
+ *    Flow F1:  C  -> B  -> A
+ */ 
+strict digraph Example {
+    A  -> B  -> C; 
+    C  -> B  -> A; 
+labelloc  =  "t" 
+label = <Graph Example <br/>
+Flow F0: A -&#62; B -&#62; C<br/>
+Flow F1: C -&#62; B -&#62; A<br/>
+>
+} 
