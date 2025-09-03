@@ -703,5 +703,24 @@ public class WorkLoad implements ReliabilityParameters {
     String inputGraphString = fm.readGraphFile(warpOptions.getInputFileName());
     return inputGraphString;
   }
+  
+  public static void main(String[] args) {
+	    Options warpOptions = new Options();
+	    warpOptions.setInputFile("StressTest.txt");
+	    WorkLoad wl = new WorkLoad(warpOptions);
+	    WorkLoadVisualization wlv = new WorkLoadVisualization(warpOptions);
+	    Description description = wlv.visualization();
+
+	    wl.setFlowsInDMorder();
+
+	    System.out.println(wl.getName());
+	    for (String prio : wl.getFlowNamesInPriorityOrder()) {
+	        for (String desc : description) {
+	            if (desc.startsWith(prio + " (")) {
+	                System.out.print(desc);
+	            }
+	        }
+	    }
+	}
 
 }
