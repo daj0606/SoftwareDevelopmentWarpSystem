@@ -703,5 +703,45 @@ public class WorkLoad implements ReliabilityParameters {
     String inputGraphString = fm.readGraphFile(warpOptions.getInputFileName());
     return inputGraphString;
   }
+  
+  /* This is a helper method for sorting flows in main
+   * Input: an individual flow line
+   * Output: the deadline of the flow (located between the first open parenthesis and the first comma)
+   */
+  private static int extractFirstNumber(String line) {
+      int start = line.indexOf('(') + 1;
+      int end = line.indexOf(',', start);
+      return Integer.parseInt(line.substring(start, end).trim());
+  }
+  
+  /* Prints the name of the graph followed by a list of flows for the graph such that
+   * the flows are printed in order from smallest to largest deadline
+   */
+  public static void main(String[] args) {
+	  // The name of the file for which the flows will be ordered
+	  String fileName = "StressTest.txt";
+	  Options warpOptions = new Options();
+	  warpOptions.setInputFile(fileName);
+	  WorkLoad warpWorkLoad = new WorkLoad(warpOptions);
+	  WorkLoadVisualization warpVisualization = new WorkLoadVisualization(warpOptions);
+	  // Gets the description of the input file 
+	  Description warpDescription = warpVisualization.visualization();
+	  String warpName = warpWorkLoad.getName();
+	  // Specification states that the graph name must be printed first
+	  System.out.println(warpName); 
+	  
+	  /* The sublist excludes the first and last values of warpDescription
+	   * because they are not flows (the first line is the title and the last is a bracket)
+	   * 
+	   * The comparator object uses the helper function to extract the deadline from each flow
+	   * and then sorts each line in the sublist from least-to-greatest based on that deadline
+	   */
+	  warpDescription.subList(1, warpDescription.size() - 1)
+	                 .sort(Comparator.comparingInt(WorkLoad::extractFirstNumber));
+	  for(int i = 1; i < warpDescription.size()-1; i++) { 
+		 System.out.print(warpDescription.get(i));
+	  }
+	  return;
+  }
 
 }
