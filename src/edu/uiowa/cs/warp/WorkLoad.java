@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.Vector;
 import java.util.stream.Collectors;
+import java.util.Map;
+import java.util.LinkedHashMap;
 
 /**
  * Build the nodes and flows for the workload described in the workload description file, whose name
@@ -702,6 +704,45 @@ public class WorkLoad implements ReliabilityParameters {
     FileManager fm = warpOptions.getFileManager();
     String inputGraphString = fm.readGraphFile(warpOptions.getInputFileName());
     return inputGraphString;
+  }
+  
+  public static void main(String[] args) {
+	  Options warpOptions = new Options(); 
+	  warpOptions.setInputFile("StressTest.txt");
+	  WorkLoad wl = new WorkLoad(warpOptions);
+	  WorkLoadVisualization wlv = new WorkLoadVisualization(warpOptions);
+	  Description description = wlv.visualization();
+	  Map<String,String> byName = new LinkedHashMap<>();
+	  
+	  //Task e.1
+	  System.out.println(wl.getName());
+	  wl.setFlowsInDMorder(); //Set Flow in DM order. Otherwise getFlowsInPriorityOrder is an empty arr.
+	  System.out.println(wl.getFlowNamesInPriorityOrder());
+
+
+	  List<String> dmNames = wl.getFlowNamesInPriorityOrder(); // 2) names in DM order
+
+	  String[] lines = description.toString().split("\\R"); // split by line breaks
+
+	  // Parse for Name -> line map from the Description block
+	  for (String line : lines) {
+	      // skip header/footer like "StressTest {" and "}"
+	      if (line.trim().isEmpty() || line.contains("{") || line.equals("}")) continue;
+	      // extract flow name before the '('
+	      // e.g., "F1 (1, 20, 20, 0) : B -> C -> D"
+	      int idx = line.indexOf('(');
+	      if (idx > 0) {
+	          String name = line.substring(0, idx).trim();
+	          byName.put(name, line);
+	      }
+	  }
+
+	  // Output: DM order
+	  System.out.println(wl.getName()); 
+	  for (String name : dmNames) {
+	      String line = byName.get(name);
+	      if (line != null) System.out.println(line);
+	  }
   }
 
 }
