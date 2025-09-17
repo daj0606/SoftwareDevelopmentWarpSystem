@@ -64,7 +64,10 @@ public class WorkLoad implements ReliabilityParameters {
     // order
     flowNamesInPriorityOrder = new ArrayList<>();
   }
-
+  /**
+   * Gets the user the options
+   * @return Options object
+   */
   public Options getOptions () {
     return warpOptions;
   }
