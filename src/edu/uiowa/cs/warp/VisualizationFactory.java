@@ -102,6 +102,12 @@ public class VisualizationFactory {
     return viz;
   }
 
+  /**
+   * Generates output for the visualization by writing it to a file,
+   * displays the visualization if the Options object requests display 
+   * 
+   * @param viz A WorkLoad or Warp visualization 
+   */
   private static void executeVisualizations(Visualization viz) {
     if (viz != null) {
       Options options = viz.getOptions();
@@ -112,6 +118,14 @@ public class VisualizationFactory {
     }
   }
 
+  /**
+   * Creates and returns a visualization for the given workload based on the specified visualization type
+   * 
+   * @param workload the workload to visualization
+   * @param choice the visualization type to create 
+   * @return a visualization object corresponding to the given choice and workload.
+   * 		
+   */
   private static Visualization createWorkLoadVisualization(WorkLoad workload, WorkLoadVisualizations choice) {
     Visualization viz = null;
     /* create the requested visualization */
@@ -140,6 +154,13 @@ public class VisualizationFactory {
     return viz;
   }
 
+  /**
+   * Creates and returns a visualization for the given warp system and specified visualization type
+   * 
+   * @param warp the warp system to visualize
+   * @param choice the visualization type to create
+   * @return a visualization object corresponding to the given choice and warp system
+   */
   private static Visualization createSystemVisualization(WarpInterface warp, SystemVisualizations choice) {
     Visualization viz = null;
     switch (choice) { // select the requested visualization
