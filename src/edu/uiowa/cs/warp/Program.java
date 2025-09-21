@@ -61,11 +61,6 @@ public class Program implements SystemAttributes {
     }
   }
 
-  /**
-   * note: Re-factored incorrectly, should be called "getWorkLoad"
-   *
-   * @return the workLoad
-   */
   public WorkLoad toWorkLoad() {
     return workLoad;
   }
@@ -1149,9 +1144,6 @@ public class Program implements SystemAttributes {
     scheduleBuilt = schedule;
   }
 
-  /**
-   * @return the ProgramSchedule
-   */
   public ProgramSchedule getSchedule() {
     return scheduleBuilt;
   }
@@ -1212,11 +1204,6 @@ public class Program implements SystemAttributes {
     return workLoad.getNumFaults();
   }
 
-  /**
-   * Constructs and returns a HashMap mapping node names to corresponding indexes in the schedule table
-   * 
-   * @return a HashMap where each key is a node and each value is the index of that node in the schedule
-   */
   public HashMap<String, Integer> getNodeMapIndex() {
     var orderedNodes = workLoad.getNodeNamesOrderedAlphabetically(); // create an array of node
                                                                      // names
