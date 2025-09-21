@@ -40,7 +40,14 @@ public class WorkLoad implements ReliabilityParameters {
 
   private Options warpOptions;
 
-
+  /**
+   * Constructs a new WorkLoad object using the provided Options
+   * 
+   * This constructor initializes default parameters (flows, nodes, and flow order lists), copies
+   * the options provided, and builds the nodes and flows using the input graph file provided in Options
+   * 
+   * @param options the Warp options used to configure the workload 
+   */
   WorkLoad (Options options) {
     setDefaultParameters();
     warpOptions = new Options(options);
@@ -126,7 +133,7 @@ public class WorkLoad implements ReliabilityParameters {
   }
 
   /**
-   * @return the flowNamesInPriorityOrder
+   * @return the flowNamesInPriorityOrder (an ArrayList of flows sorted in priority order) 
    */
   public ArrayList<String> getFlowNamesInPriorityOrder() {
     return flowNamesInPriorityOrder;
@@ -175,10 +182,12 @@ public class WorkLoad implements ReliabilityParameters {
   public void setName(String name) {
     this.name = name;
   }
-
+  
   /**
-   * @param flowNamesInOriginalOrder the flowNamesInOriginalOrder to set
-   */
+  * Sets the list of flow names to the original order in which they were read
+  *
+  * @param flowNamesInOriginalOrder an ArrayList containing flow names in the original order
+  */
   public void setFlowNamesInOriginalOrder(ArrayList<String> flowNamesInOriginalOrder) {
     this.flowNamesInOriginalOrder = flowNamesInOriginalOrder;
   }
@@ -248,6 +257,13 @@ public class WorkLoad implements ReliabilityParameters {
   }
 
 
+  /**
+   * Retrieves the priority assigned to the specified node in the given flow
+   *
+   * @param flowName the name of the flow
+   * @param nodeName the name of the node whose priority is being retrieved
+   * @return the priority of the specified node in the flow
+   */
   public Integer getFlowPriority(String flowName, String nodeName) {
     var priority = 0;
     var flow = getFlow(flowName);
@@ -262,6 +278,12 @@ public class WorkLoad implements ReliabilityParameters {
     return priority;
   }
 
+  /**
+   * Assigns a new priority value to the specified flow.
+   *
+   * @param flowName the name of the flow to update.
+   * @param priority the new priority value to set.
+   */
   public void setFlowPriority(String flowName, Integer priority) {
     var flowNode = getFlow(flowName);
     flowNode.setPriority(priority);
@@ -297,6 +319,12 @@ public class WorkLoad implements ReliabilityParameters {
     return flowNode.getPeriod();
   }
 
+  /**
+   * Retrieves the deadline of the specified flow
+   *
+   * @param flowName the name of the flow
+   * @return the deadline value for the flow
+   */
   public Integer getFlowDeadline(String flowName) {
     var flowNode = getFlow(flowName);
     return flowNode.getDeadline();
@@ -312,6 +340,13 @@ public class WorkLoad implements ReliabilityParameters {
     return flowNode.numTxPerLink;
   }
 
+  /**
+   * Orders the flows in this workload by their assigned priority value.
+   * 
+   * The flows are sorted by their index to preserve original order among flows with equal priority, 
+   * and then they are sorted by their priority as the primary key.
+   * 
+   */
   public void setFlowsInPriorityOrder() {
     // create a list of Flow objects from the FlowMap using the stream interface.
     List<Flow> unsortedFlows = flows.values().stream().collect(Collectors.toList());
@@ -327,6 +362,11 @@ public class WorkLoad implements ReliabilityParameters {
     sortedFlows.forEach((node) -> flowNamesInPriorityOrder.add(node.getName()));
   }
 
+  /**
+   * Orders the flows in this workload by deadline monotonic (DM) scheduling order
+   * 
+   * The flows are sorted by their priority as a secondary key and then their deadline as the primary key 
+   */
   public void setFlowsInDMorder() {
     /* create a list of Flow objects from the FlowMap using the stream interface. */
     List<Flow> unsortedFlows = flows.values().stream().collect(Collectors.toList());
@@ -344,6 +384,11 @@ public class WorkLoad implements ReliabilityParameters {
     sortedFlows.forEach((node) -> flowNamesInPriorityOrder.add(node.getName()));
   }
 
+  /**
+   * Orders the flows in this workload by rate monotonic (RM) scheduling order
+   * 
+   * The flows are sorted by their priority as a secondary key and then their period as the primary key 
+   */
   public void setFlowsInRMorder() {
     // create a list of Flow objects from the FlowMap using the stream interface.
     List<Flow> unsortedFlows = flows.values().stream().collect(Collectors.toList());
@@ -632,6 +677,13 @@ public class WorkLoad implements ReliabilityParameters {
     return index;
   }
 
+  /**
+   * Returns an array of node names that belong to the specified flow, in the order they
+   * were defined in the flow specification/input graph file.
+   *
+   * @param flowName the name of the flow for which node names should be returned.
+   * @return an array of node names in flow order, or an empty array if the flow does not exist.
+   */
   public String[] getNodesInFlow(String flowName) {
     // get the flow node for requested Flow and then loop through the
     // nodes in the flow to create an array of the node names in
@@ -704,23 +756,44 @@ public class WorkLoad implements ReliabilityParameters {
     return inputGraphString;
   }
   
+  /* This is a helper method for sorting flows in main
+   * Input: an individual flow line
+   * Output: the deadline of the flow (located between the first open parenthesis and the first comma)
+   */
+  private static int extractFirstNumber(String line) {
+      int start = line.indexOf('(') + 1;
+      int end = line.indexOf(',', start);
+      return Integer.parseInt(line.substring(start, end).trim());
+  }
+  
+  /* Prints the name of the graph followed by a list of flows for the graph such that
+   * the flows are printed in order from smallest to largest deadline
+   */
   public static void main(String[] args) {
-	    Options warpOptions = new Options();
-	    warpOptions.setInputFile("StressTest.txt");
-	    WorkLoad wl = new WorkLoad(warpOptions);
-	    WorkLoadVisualization wlv = new WorkLoadVisualization(warpOptions);
-	    Description description = wlv.visualization();
-
-	    wl.setFlowsInDMorder();
-
-	    System.out.println(wl.getName());
-	    for (String prio : wl.getFlowNamesInPriorityOrder()) {
-	        for (String desc : description) {
-	            if (desc.startsWith(prio + " (")) {
-	                System.out.print(desc);
-	            }
-	        }
-	    }
-	}
+	  // The name of the file for which the flows will be ordered
+	  String fileName = "StressTest.txt";
+	  Options warpOptions = new Options();
+	  warpOptions.setInputFile(fileName);
+	  WorkLoad warpWorkLoad = new WorkLoad(warpOptions);
+	  WorkLoadVisualization warpVisualization = new WorkLoadVisualization(warpOptions);
+	  // Gets the description of the input file 
+	  Description warpDescription = warpVisualization.visualization();
+	  String warpName = warpWorkLoad.getName();
+	  // Specification states that the graph name must be printed first
+	  System.out.println(warpName); 
+	  
+	  /* The sublist excludes the first and last values of warpDescription
+	   * because they are not flows (the first line is the title and the last is a bracket)
+	   * 
+	   * The comparator object uses the helper function to extract the deadline from each flow
+	   * and then sorts each line in the sublist from least-to-greatest based on that deadline
+	   */
+	  warpDescription.subList(1, warpDescription.size() - 1)
+	                 .sort(Comparator.comparingInt(WorkLoad::extractFirstNumber));
+	  for(int i = 1; i < warpDescription.size()-1; i++) { 
+		 System.out.print(warpDescription.get(i));
+	  }
+	  return;
+  }
 
 }
