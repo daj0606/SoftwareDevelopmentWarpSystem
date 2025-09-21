@@ -38,7 +38,7 @@ public class Channels {
 	}
 
 	Integer nChannels; // size of the full set of channels
-	Boolean verbose;
+	Boolean verbose; // determines the length and depth of the output
 	ArrayList<ChannelSet> channelsAvailable; // ArrayList to hold channels available in each time slot
 
 	/**
@@ -78,7 +78,7 @@ public class Channels {
 	/**
 	 * Checks whether the given time slot has no channels available.
 	 * 
-	 * @param timeSlot idnex of the time slot
+	 * @param timeSlot index of the time slot
 	 * @return true if the set is empty, false otherwise
 	 */
 	public Boolean isEmpty(int timeSlot) {
