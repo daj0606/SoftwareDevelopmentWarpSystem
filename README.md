@@ -2,7 +2,8 @@
 
 This is Benjamin Kleiman's version of WARP that will be used for CS:2820 in the year 2025.
 
-HW2 - Dallas Jackson - Added JavaDoc comments for Warp, Channels, and ChennelAnalysis
+HW2 - Dallas Jackson: Added JavaDoc comments for Warp, Channels, and ChannelAnalysis
+HW2 - Benjamin Kleiman: Added JavaDoc comments for ProgramVisualization, VisualizationFactory, and WorkLoad
 
 This version 2.0 code base will be used for the University of Iowa 
 CS 2820 Introduction to Software Development course. The code was 
