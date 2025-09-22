@@ -41,8 +41,19 @@ public class WorkLoad implements ReliabilityParameters {
   private ArrayList<String> flowNamesInPriorityOrder = new ArrayList<>();
 
   private Options warpOptions;
-
-
+  
+  /**
+  * Constructs a new {@code WorkLoad} instance using the provided {@link Options}.
+  * <p>
+  * This constructor initializes default parameters (flows, nodes, ordering lists),
+  * copies/uses the supplied options, sets reliability and fault model parameters,
+  * and builds the Nodes and Flows by parsing the workload description file via
+  * {@link WorkLoadListener.buildNodesAndFlows(WorkLoad)}.
+  * </p>
+  *
+  * @param options the configuration and workload parameters (input file name,
+  * reliability, faults, etc.) for this workload
+  */
   WorkLoad (Options options) {
     setDefaultParameters();
     warpOptions = new Options(options);
@@ -128,7 +139,13 @@ public class WorkLoad implements ReliabilityParameters {
   }
 
   /**
-   * @return the flowNamesInPriorityOrder
+   * Returns the names of the flows in the most recently determined priority order.
+   * <p>
+   * The order is set by calling one of the ordering methods such as {@link #setFlowsInPriorityOrder()},
+   * {@link #setFlowsInDMorder()}, or {@link #setFlowsInRMorder()}.
+   * </p>
+   *
+   * @return an {@link ArrayList} of flow names in priority order; empty list if none have been set
    */
   public ArrayList<String> getFlowNamesInPriorityOrder() {
     return flowNamesInPriorityOrder;
@@ -350,7 +367,15 @@ public class WorkLoad implements ReliabilityParameters {
     flowNamesInPriorityOrder = new ArrayList<>();
     sortedFlows.forEach((node) -> flowNamesInPriorityOrder.add(node.getName()));
   }
-
+  
+  /**
+   * Orders the flows according to Deadline Monotonic (DM) policy.
+   * <p>
+   * Flows are sorted first by priority (as secondary key), then by deadline (primary key).
+   * After sorting, this method updates {@code flowNamesInPriorityOrder} to reflect
+   * that DM order.
+   * </p>
+   */
   public void setFlowsInDMorder() {
     /* create a list of Flow objects from the FlowMap using the stream interface. */
     List<Flow> unsortedFlows = flows.values().stream().collect(Collectors.toList());
@@ -367,7 +392,15 @@ public class WorkLoad implements ReliabilityParameters {
     flowNamesInPriorityOrder = new ArrayList<>();
     sortedFlows.forEach((node) -> flowNamesInPriorityOrder.add(node.getName()));
   }
-
+  
+  /**
+   * Orders the flows according to Rate Monotonic (RM) policy.
+   * <p>
+   * Flows are sorted first by priority (as secondary key), then by period (primary key).
+   * After sorting, this method updates {@code flowNamesInPriorityOrder} to reflect
+   * that RM order.
+   * </p>
+   */
   public void setFlowsInRMorder() {
     // create a list of Flow objects from the FlowMap using the stream interface.
     List<Flow> unsortedFlows = flows.values().stream().collect(Collectors.toList());
@@ -655,7 +688,17 @@ public class WorkLoad implements ReliabilityParameters {
     }
     return index;
   }
-
+  /**
+  * Returns the ordered list of node names that constitute the specified flow.
+  * <p>
+  * The returned array preserves the order in which nodes appear in the flow
+  * specification (e.g., as in the input graph file).
+  * </p>
+  *
+  * @param flowName the name of the flow whose nodes are requested
+  * @return a string array of node names in the flow, in the flow’s internal order;
+  * returns an empty array if no flow with the given name exists
+  */
   public String[] getNodesInFlow(String flowName) {
     // get the flow node for requested Flow and then loop through the
     // nodes in the flow to create an array of the node names in
