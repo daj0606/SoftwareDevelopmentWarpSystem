@@ -102,6 +102,11 @@ public class VisualizationFactory {
     return viz;
   }
 
+  /**
+   * 
+   * Launches visualization when requested, as specified by Options object
+   * @param viz
+   */
   private static void executeVisualizations(Visualization viz) {
     if (viz != null) {
       Options options = viz.getOptions();
@@ -111,7 +116,14 @@ public class VisualizationFactory {
       }
     }
   }
-
+/**
+ * 
+ * Creates a workload visualization based on choice made in the switch. This method selects the appropriate
+ * visualization based on specified type.
+ * @param workload
+ * @param choice
+ * @return object based on requested visualization
+ */
   private static Visualization createWorkLoadVisualization(WorkLoad workload, WorkLoadVisualizations choice) {
     Visualization viz = null;
     /* create the requested visualization */

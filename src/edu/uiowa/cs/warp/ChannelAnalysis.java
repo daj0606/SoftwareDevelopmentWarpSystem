@@ -18,12 +18,21 @@ public class ChannelAnalysis {
   private ProgramSchedule programTable;
   private Boolean conflictExists;
 
+  /**
+   * 
+   * Constructs channel analysis object using warp interface.
+   * @param warp
+   */
   ChannelAnalysis(WarpInterface warp) {
     this.program = warp.getProgram();
     this.programTable = program.getSchedule();
     conflictExists = false;
   }
-
+/**
+ * 
+ * Checks whether there is a channel conflict.
+ * @return true if conflict exists
+ */
   public Boolean isChannelConflict() {
     return conflictExists;
   }

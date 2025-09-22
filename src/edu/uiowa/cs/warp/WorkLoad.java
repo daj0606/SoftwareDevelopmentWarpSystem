@@ -179,6 +179,8 @@ public class WorkLoad implements ReliabilityParameters {
   }
 
   /**
+   * Sets the list of flow names in original order
+   * 
    * @param flowNamesInOriginalOrder the flowNamesInOriginalOrder to set
    */
   public void setFlowNamesInOriginalOrder(ArrayList<String> flowNamesInOriginalOrder) {
@@ -186,6 +188,8 @@ public class WorkLoad implements ReliabilityParameters {
   }
 
   /**
+   * Sets the list of flow names in priority order
+   * 
    * @param flowNamesInPriorityOrder the flowNamesInPriorityOrder to set
    */
   public void setFlowNamesInPriorityOrder(ArrayList<String> flowNamesInPriorityOrder) {
@@ -249,7 +253,13 @@ public class WorkLoad implements ReliabilityParameters {
     flowNode.linkTxAndTotalCost.add(DEFAULT_TX_NUM);
   }
 
-
+/**
+ * Retrieves priority ranking of given flows
+ * 
+ * @param flowName
+ * @param nodeName
+ * @return index of the source node
+ */
   public Integer getFlowPriority(String flowName, String nodeName) {
     var priority = 0;
     var flow = getFlow(flowName);
@@ -264,6 +274,12 @@ public class WorkLoad implements ReliabilityParameters {
     return priority;
   }
 
+  /**
+   * Sets the priority level for each node
+   * 
+   * @param flowName the name of the flow getting priority set
+   * @param priority integer value assigned to flow
+   */
   public void setFlowPriority(String flowName, Integer priority) {
     var flowNode = getFlow(flowName);
     flowNode.setPriority(priority);
@@ -299,6 +315,12 @@ public class WorkLoad implements ReliabilityParameters {
     return flowNode.getPeriod();
   }
 
+  /**
+   * Retrieves the deadline for the flow at each given name
+   * 
+   * @param flowName The name of the flow whose deadline is requested
+   * @return deadline for requested flow
+   */
   public Integer getFlowDeadline(String flowName) {
     var flowNode = getFlow(flowName);
     return flowNode.getDeadline();
