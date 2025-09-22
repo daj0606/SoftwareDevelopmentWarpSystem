@@ -103,9 +103,9 @@ public class VisualizationFactory {
   }
 
   /**
-   * 
    * Launches visualization when requested, as specified by Options object
-   * @param viz
+   *
+   * @param viz 
    */
   private static void executeVisualizations(Visualization viz) {
     if (viz != null) {
