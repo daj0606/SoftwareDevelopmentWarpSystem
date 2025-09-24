@@ -20,28 +20,72 @@ public class Program implements SystemAttributes {
 
   // Global flags and data structures
   // FileManager wfm; // class to provide basic WARP file management functions
-  private WorkLoad workLoad; // WarpScheduler build schedules for flows in WARPflows class
+  /**
+   * WarpScheduler build schedules for flows in WARPflows class
+   */
+  private WorkLoad workLoad; 
+  /**
+   * The synthesized per-slot, per-node instruction table (final output).
+   */
   private ProgramSchedule scheduleBuilt;
   // private ScheduleChoices schedulerSelected; // set the type of scheduler selected
-  private String schChoice; // Name of the scheduler selected for output file name
-  private String schedulerName; // test string of scheduler selected
+  /**
+   * Name of the scheduler selected for output file name
+   */
+  private String schChoice; 
+  /**
+   * Test string of scheduler selected
+   */
+  private String schedulerName; 
   // private Integer nTransmissions;
+  /**
+   * If {@code true}, enable RealTime HART push semantics.
+   */
   private Boolean realTimeHARTflag;
+  /**
+   * If {@code true}, attempt instruction-combining optimizations.
+   */
   private Boolean optimizationRequested;
-  private Channels channelsAvailable; // channels available for each time slot
+  /**
+   * Channels available for each time slot
+   */
+  private Channels channelsAvailable; 
+  /**
+   * Number of physical/logical channels that can be used concurrently.
+   */
   private Integer nChannels;
+  /**
+   * If {@code true}, print schedule-building details and latency info.
+   */
   private Boolean verbose;
   // private Boolean reportLatency;
+  /**
+   * Collects warning lines for flows whose latency exceeds their deadline.
+   */
   private Description deadlineMisses;
+  /**
+   * Global options used to configure scheduling, visualization, and logging.
+   */
   private Options warpOptions;
+  /**
+   * Link-fault/reliability model used during synthesis.
+   */
   private FaultModel faultModel;
   
+  /**
+   * Constructs a program builder for the given workload
+   * 
+   * @param workLoad workload to schedule; must not be {@code null}
+   */
   Program(WorkLoad workLoad) {
     this.workLoad = workLoad; // flows for which schedules will be built
     initializeClassAttributes();
     buildProgram();
   }
 
+  /**
+   * Initializes instance fields from {@link #workLoad} and {@link Options}.
+   */
   private void initializeClassAttributes () { 
     /* requires workLoad to have already been set.
      * If not, all class attributes will be null!
@@ -61,10 +105,19 @@ public class Program implements SystemAttributes {
     }
   }
 
+  /**
+   * Returns the underlying workload used to synthesize this program.
+   * 
+   * @return the workLoad
+   */
   public WorkLoad toWorkLoad() {
     return workLoad;
   }
 
+  /**
+   * Dispatches to the correct synthesis path based on the selected scheduler
+   * If {@link #workLoad} is {@code null}, this method returns without building.
+   */
   private void buildProgram() {
     /* requires workLoad to not be null. If so, then just return */
     if (workLoad == null) {
@@ -130,6 +183,9 @@ public class Program implements SystemAttributes {
     }
   }
 
+  /**
+   * Legacy program builder that synthesizes per-slot instructions directly.
+   */
   private void buildOriginalProgram() { // builds a Priority schedule
 
     if (verbose) {
@@ -710,6 +766,7 @@ public class Program implements SystemAttributes {
     setSchedule(schedule); // store the schedule built
   }
 
+
   private String waitInstruction(String channel) {
     var size = channel.length();
     if (!Utilities.isInteger(channel)) {
@@ -718,7 +775,6 @@ public class Program implements SystemAttributes {
     }
     return String.format("wait(#%s)", channel);
   }
-
 
   private String elseWaitInstruction(String channel) {
     var size = channel.length();
@@ -741,6 +797,12 @@ public class Program implements SystemAttributes {
     return String.format("push(%1$s: %2$s -> %3$s, #%4$s)", flow, src, snk, channel);
   }
 
+  /**
+   * Extracts the first {@code #<channel>} value from a formatted instruction string.
+   * 
+   * @param Instruction instruction string in DSL format
+   * @return channel index as a string (no leading '#')
+   */
   private String getFirstChannelInInstruction(String Instruction) {
     var beginIndex = Instruction.indexOf('#') + 1; // get index of the start of the channel #
     var endIndex = Instruction.indexOf(')', beginIndex); // get index of the last character of the
@@ -749,6 +811,7 @@ public class Program implements SystemAttributes {
     return channel;
   }
 
+  
   private Integer findNextAvailableInstructionTimeSlot(ProgramSchedule schedule,
       Integer startLocation, Integer nodeInFlow, Integer transIndex, Integer nTx,
       Integer[] previousNodeInstruction, Integer[] currentNodeInstruction, String sleepInstruction,
@@ -1144,6 +1207,11 @@ public class Program implements SystemAttributes {
     scheduleBuilt = schedule;
   }
 
+  /**
+   * Returns the synthesized schedule. May be {@code null} if building failed or was skipped.
+   *  
+   * @return the program schedule
+   */
   public ProgramSchedule getSchedule() {
     return scheduleBuilt;
   }
@@ -1204,6 +1272,12 @@ public class Program implements SystemAttributes {
     return workLoad.getNumFaults();
   }
 
+  /**
+   * Builds a mapping from node name to its column index in the schedule table,
+   * using the workload’s alphabetically ordered node list.
+   * 
+   * @return map from node name to zero-based column index
+   */
   public HashMap<String, Integer> getNodeMapIndex() {
     var orderedNodes = workLoad.getNodeNamesOrderedAlphabetically(); // create an array of node
                                                                      // names
