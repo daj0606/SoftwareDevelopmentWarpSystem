@@ -8,10 +8,26 @@ package edu.uiowa.cs.warp;
  * @version 2.0 Fall 2025
  */
 public class WorkLoadVisualization extends Visualization {
-
+	
+  /**
+   * Expected suffix of input file is (.wld).
+   * Constant used to validate files used.
+   */
   private static final String INPUT_FILE_SUFFIX = ".wld";
+  
+  /**
+   * Descriptive data for workload visualization.
+   */
   private Description description;
+  
+  /**
+   * String representation of the graph.
+   */
   private String inputGraphString;
+  
+  /**
+   * Name of the input file.
+   */
   private String inputFileName;
   
   /**
@@ -50,7 +66,11 @@ public class WorkLoadVisualization extends Visualization {
   public String toString() {
     return inputGraphString;
   }
-
+/**
+ * Retrieves contents of file from name given and reads them into description object
+ * 
+ * @param inputFile name of text file to be read to initialize graph
+ */
   private void initialize(String inputFile) {
 	/* Get the input graph file name and read its contents */
     FileManager fm = options.getFileManager();

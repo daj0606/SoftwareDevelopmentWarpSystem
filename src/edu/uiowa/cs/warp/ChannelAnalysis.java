@@ -13,17 +13,42 @@ package edu.uiowa.cs.warp;
  *
  */
 public class ChannelAnalysis {
-
+  /**
+   * Program obtained from warp interface.
+   */
   private Program program;
+  
+  /**
+   * Schedule of the program, used for channel conflicts.
+   */
   private ProgramSchedule programTable;
+  
+  /**
+   * Flag indicating whether a channel conflict exists.
+   * Initially set to {@code false} until analysis determines otherwise.
+   */
   private Boolean conflictExists;
 
+  /**
+   * Constructs a {@code ChannelAnalysis} object using the given warp interface.
+   * <p>
+   * The constructor initializes the program and its schedule from the provided
+   * {@code WarpInterface}, and sets the conflict flag to {@code false}.
+   * </p>
+   *
+   * @param warp the {@code WarpInterface} used to retrieve the program
+   *             and its associated schedule
+   */
   ChannelAnalysis(WarpInterface warp) {
     this.program = warp.getProgram();
     this.programTable = program.getSchedule();
     conflictExists = false;
   }
-
+/**
+ * Checks whether a channel conflict exists.
+ * 
+ * @return {@code true} if a conflict exists; {@code false} otherwise
+ */
   public Boolean isChannelConflict() {
     return conflictExists;
   }

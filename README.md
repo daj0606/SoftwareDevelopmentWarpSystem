@@ -13,5 +13,11 @@ version has also undergone signficant refactoring of GUI-related code, Warp.java
 and the factory classes.
 <br>
 Remember to add the scheduler to all --all configurations to control data output.
+#HW2
+This assignment was completed by Sean Mukunza and David Lin. 
+David Lin completed the javadoc for ProgramVisualization.java, Workload.java(a-e), and Program.java.
+Sean Mukunza completed the javadoc for ChannelAnalysis.java, VisualizationFactory.java,
+Workload.java (f-j). 
+Warp.java and Channels.java were completed jointly. 
 
 

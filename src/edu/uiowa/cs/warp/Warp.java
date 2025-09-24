@@ -35,14 +35,17 @@ import edu.uiowa.cs.warp.Visualizable.SystemVisualizations;
  *
  */
 public class Warp {
-
+  
+  /**
+   * Global options that configure WARP execution, visualization, and output.
+   */
   private static Options warpOptions;
 
   /**
    * Verifies that all deadlines are met, end-to-end message transmission
    * reliabilities are met, and no channel conflicts exist in the Warp
    * programs that schedule message flow transmissions.
-   * @param warp
+   * @param warp the WARP system instance to verify
    */
   private static void verifyPerformanceRequirements(WarpInterface warp) {
     verifyDeadlines(warp);

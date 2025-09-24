@@ -102,6 +102,18 @@ public class VisualizationFactory {
     return viz;
   }
 
+  /**
+   * Executes the given visualization by exporting it to a file and, 
+   * if requested in its options, displaying it on screen.
+   *
+   * <p>This method first checks that the provided {@code Visualization} 
+   * object is not {@code null}. It then retrieves its {@code Options}, 
+   * writes the visualization to a file, and, if the options indicate 
+   * that a display is requested, renders the visualization.</p>
+   *
+   * @param viz the {@code Visualization} object to execute;
+   *            if {@code null}, no action is taken
+   */
   private static void executeVisualizations(Visualization viz) {
     if (viz != null) {
       Options options = viz.getOptions();
@@ -111,7 +123,24 @@ public class VisualizationFactory {
       }
     }
   }
-
+  /**
+   * Creates a workload visualization based on the specified choice.
+   * <p>
+   * This method selects and constructs the appropriate {@code Visualization} 
+   * object depending on the given {@code WorkLoadVisualizations} choice. 
+   * Supported visualization types include communication graphs, GraphViz graphs, 
+   * input graphs, and sensor network visualizations. If the choice is not 
+   * recognized, a {@code NotImplementedVisualization} is returned.
+   * </p>
+   *
+   * @param workload the {@code WorkLoad} object that provides the data and options 
+   *                 required to generate the visualization
+   * @param choice   the {@code WorkLoadVisualizations} enum value that determines 
+   *                 which type of visualization to create
+   * @return the constructed {@code Visualization} object corresponding to the 
+   *         requested type; if the choice is unrecognized, a 
+   *         {@code NotImplementedVisualization} is returned
+   */
   private static Visualization createWorkLoadVisualization(WorkLoad workload, WorkLoadVisualizations choice) {
     Visualization viz = null;
     /* create the requested visualization */
