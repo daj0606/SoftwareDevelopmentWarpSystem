@@ -37,9 +37,18 @@ public class Channels {
 		}
 	}
 
-	Integer nChannels; // size of the full set of channels
-	Boolean verbose; // determines the length and depth of the output
-	ArrayList<ChannelSet> channelsAvailable; // ArrayList to hold channels available in each time slot
+	/**
+	 * The size of the full set of channels
+	 */
+	Integer nChannels; 
+	/**
+	 * Determines the length and depth of the outputs
+	 */
+	Boolean verbose; 
+	/**
+	 * An ArrayList that holds whether each channel is available in each time slot 
+	 */
+	ArrayList<ChannelSet> channelsAvailable; 
 
 	/**
 	 * Creates a channel manager with the given number of channels and a verbosity flag.
