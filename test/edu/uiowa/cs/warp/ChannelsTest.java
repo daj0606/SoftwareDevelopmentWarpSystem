@@ -1,13 +1,14 @@
 package edu.uiowa.cs.warp;
 
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.Set;
 
 class ChannelsTest {
 
 	private Channels channels;
-
+	@BeforeEach
 	void setUp() throws Exception{
 		channels = new Channels(4, false);
 	}
