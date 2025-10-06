@@ -4,9 +4,9 @@ package edu.uiowa.cs.warp;
  * Performs a channel analysis of the WARP program.
  * <p>
  * 
- * CS2820 Fall 2025 Project: Implement this class to analyze the use of
- * channels by the Warp program. A channel analysis table is created that
- * shows the nodes and flows using each channel in each time slot.
+ * CS2820 Fall 2025 Project: Implement this class to analyze the use of channels
+ * by the Warp program. A channel analysis table is created that shows the nodes
+ * and flows using each channel in each time slot.
  * 
  * @author sgoddard
  * @version 2.0 Fall 2025
@@ -14,17 +14,36 @@ package edu.uiowa.cs.warp;
  */
 public class ChannelAnalysis {
 
-  private Program program;
-  private ProgramSchedule programTable;
-  private Boolean conflictExists;
+	/**
+	 * Represents the current WARP program
+	 */
+	private Program program; 
+	/**
+	 * Schedule table which maps time slots and channels to transmissions
+	 */
+	private ProgramSchedule programTable; 
+	/**
+	 * Flag that indicates whether any channel conflict exists
+	 */
+	private Boolean conflictExists; 
 
-  ChannelAnalysis(WarpInterface warp) {
-    this.program = warp.getProgram();
-    this.programTable = program.getSchedule();
-    conflictExists = false;
-  }
+	/**
+	 * Constructs a new ChannelAnalysis object for the given WARP system.
+	 * 
+	 * @param warp the WARP system containing the program and its schedule
+	 */
+	ChannelAnalysis(WarpInterface warp) {
+		this.program = warp.getProgram();
+		this.programTable = program.getSchedule();
+		conflictExists = false;
+	}
 
-  public Boolean isChannelConflict() {
-    return conflictExists;
-  }
+	/**
+	 * Reports whether the analysis has detected a channel conflict.
+	 * 
+	 * @return true if a conflict has been found, false otherwise
+	 */
+	public Boolean isChannelConflict() {
+		return conflictExists;
+	}
 }
