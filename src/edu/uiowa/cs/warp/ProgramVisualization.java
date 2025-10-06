@@ -11,11 +11,26 @@ package edu.uiowa.cs.warp;
  */
 public class ProgramVisualization extends Visualization {
 
-	private static final String SOURCE_SUFFIX = ".dsl"; // Indicates the type of src file being visualized.
-	private ProgramSchedule sourceCode; // The schedule table of the current program.
-	private Program program; // The WARP program model being visualized.
-	private Boolean deadlinesMet; // True if all flows meet their deadlines, false otherwise.
-	private Options warpOptions; // Runtime options that control visualization behavior.
+	/**
+	 * Indicates the type of source file being visualized which is a domain specific language (dsl)
+	 */
+	private static final String SOURCE_SUFFIX = ".dsl"; 
+	/**
+	 * The schedule table of the current program
+	 */
+	private ProgramSchedule sourceCode; 
+	/**
+	 * The WARP program model being visualized
+	 */
+	private Program program; 
+	/**
+	 * True if all options meet their deadlines, false otherwise
+	 */
+	private Boolean deadlinesMet; 
+	/**
+	 * Runtime options that control visualization behavior
+	 */
+	private Options warpOptions; 
 
 	/**
 	 * Constructs a new visualization for the given WARP system.

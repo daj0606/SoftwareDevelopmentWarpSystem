@@ -14,9 +14,18 @@ package edu.uiowa.cs.warp;
  */
 public class ChannelAnalysis {
 
-	private Program program; // Represent the current WARP program.
-	private ProgramSchedule programTable; // Schedule table which maps time slots and channels to transmissions.
-	private Boolean conflictExists; // Flag that indicates whether any channel conflict exists.
+	/**
+	 * Represents the current WARP program
+	 */
+	private Program program; 
+	/**
+	 * Schedule table which maps time slots and channels to transmissions
+	 */
+	private ProgramSchedule programTable; 
+	/**
+	 * Flag that indicates whether any channel conflict exists
+	 */
+	private Boolean conflictExists; 
 
 	/**
 	 * Constructs a new ChannelAnalysis object for the given WARP system.
