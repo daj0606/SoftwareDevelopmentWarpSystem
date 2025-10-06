@@ -71,10 +71,12 @@ class ChannelTests {
 	    testChannels.addNewChannelSet();
 
 	    assertThrows(IndexOutOfBoundsException.class,
-	        () -> testChannels.getChannelSet(1));
+			() -> testChannels.getChannelSet(1),
+			"Expected IndexOutOfBoundsException when accessing time slot beyond available range (1)");
 
-	    assertThrows(IndexOutOfBoundsException.class,
-	        () -> testChannels.getChannelSet(-1));
+        assertThrows(IndexOutOfBoundsException.class,
+            () -> testChannels.getChannelSet(-1),
+            "Expected IndexOutOfBoundsException when accessing negative time slot index (-1)");
 	}
 	
 	/**
@@ -104,7 +106,8 @@ class ChannelTests {
 		Set<String> after = testChannels.getChannelSet(0);
 		
 		assertTrue(addedAgain, "addChannel should succeed after external remove");
-		assertTrue(after.contains("1"));
+		assertTrue(after.contains("1"),
+				"Expected channel set to contain '1' again after re-adding it");
 	}
 	
 	/**
@@ -151,7 +154,8 @@ class ChannelTests {
 
 	    Set<String> actual = testChannels.getChannelSet(0);
 
-	    assertTrue(actual.isEmpty());
+	    assertTrue(actual.isEmpty(),
+	    		"Expected getChannelSet(0) to return an empty set when Channels initialized with 0 channels");
 	}
 	
 	/**
@@ -411,7 +415,8 @@ class ChannelTests {
 		testChannels.addNewChannelSet();
 		
 	    assertThrows(IndexOutOfBoundsException.class,
-	        () -> testChannels.removeChannel(99, "0"));
+			() -> testChannels.removeChannel(99, "0"),
+			"Expected IndexOutOfBoundsException when removing from invalid time slot (99)");
 	}	
 	
 	/**
@@ -487,10 +492,12 @@ class ChannelTests {
 	    testChannels.addNewChannelSet();
 
 	    assertThrows(IndexOutOfBoundsException.class,
-	        () -> testChannels.addChannel(1, "0"));
+	        () -> testChannels.addChannel(1, "0"),
+	        "Expected IndexOutOfBoundsException when adding channel to non-existent time slot (1)");
 
 	    assertThrows(IndexOutOfBoundsException.class,
-	        () -> testChannels.addChannel(-1, "0"));
+	        () -> testChannels.addChannel(-1, "0"),
+	        "Expected IndexOutOfBoundsException when adding channel to negative time slot index (-1)");
 	}
 
 	/**
@@ -503,83 +510,83 @@ class ChannelTests {
 		 Boolean added = testChannels.addChannel(0, null); Set<String> actual =
 		 testChannels.getChannelSet(0);
 		 
-		 assertTrue(added,
-		 "HashSet.add(null) should return true if null not present");
+		 assertTrue(added, "HashSet.add(null) should return true if null not present");
 		 assertTrue(actual.contains(null), "Set should contain null after add"); 
 	 }
 
-	/**
-	 * Test method for {@link edu.uiowa.cs.warp.Channels#getNumChannels()}.
-	 */
-	@Test
-	void testGetNumChannelsReturnsConstructorValue() {
-	    Channels ch = new Channels(4, false);
-	    int expected = 4;
+	 /**
+	  * Test method for {@link edu.uiowa.cs.warp.Channels#getNumChannels()}.
+	  */
+	 @Test
+	 void testGetNumChannelsReturnsConstructorValue() {
+	     int expected = 4;
 
-	    Integer actual = ch.getNumChannels();
+	     Integer actual = testChannels.getNumChannels();
 
-	    assertEquals(expected, actual);
-	}
+	     assertEquals(expected, actual,
+	         "getNumChannels() should return the same number that was passed to the constructor (4)");
+	 }
 
-	/**
-	 * Test method for {@link edu.uiowa.cs.warp.Channels#getNumChannels()}.
-	 */
-	@Test
-	void testGetNumChannelsZero() {
-	    Channels ch = new Channels(0, false);
-	    int expected = 0;
+	 /**
+	  * Test method for {@link edu.uiowa.cs.warp.Channels#getNumChannels()}.
+	  */
+	 @Test
+	 void testGetNumChannelsZero() {
+	     Channels ch = new Channels(0, false);
+	     int expected = 0;
 
-	    Integer actual = ch.getNumChannels();
+	     Integer actual = ch.getNumChannels();
 
-	    assertEquals(expected, actual);
-	}
+	     assertEquals(expected, actual,
+	         "getNumChannels() should correctly return 0 when initialized with zero channels");
+	 }
 
-	/**
-	 * Test method for {@link edu.uiowa.cs.warp.Channels#getNumChannels()}.
-	 */
-	@Test
-	void testGetNumChannelsUnaffectedByAddChannel() {
-	    Channels ch = new Channels(4, false);
-	    int expected = 4;
+	 /**
+	  * Test method for {@link edu.uiowa.cs.warp.Channels#getNumChannels()}.
+	  */
+	 @Test
+	 void testGetNumChannelsUnaffectedByAddChannel() {
+	     int expected = 4;
 
-	    ch.addNewChannelSet();
-	    ch.addChannel(0, "9");
+	     testChannels.addNewChannelSet();
+	     testChannels.addChannel(0, "9");
 
-	    Integer actual = ch.getNumChannels();
+	     Integer actual = testChannels.getNumChannels();
 
-	    assertEquals(expected, actual);
-	}
+	     assertEquals(expected, actual,
+	         "getNumChannels() should remain unchanged after adding a channel to a time slot");
+	 }
 
-	/**
-	 * Test method for {@link edu.uiowa.cs.warp.Channels#getNumChannels()}.
-	 */
-	@Test
-	void testGetNumChannelsUnaffectedByMultipleTimeSlots() {
-	    Channels ch = new Channels(3, false);
-	    int expected = 3;
+	 /**
+	  * Test method for {@link edu.uiowa.cs.warp.Channels#getNumChannels()}.
+	  */
+	 @Test
+	 void testGetNumChannelsUnaffectedByMultipleTimeSlots() {
+	     int expected = 4;
 
-	    ch.addNewChannelSet();
-	    ch.addNewChannelSet();
+	     testChannels.addNewChannelSet();
+	     testChannels.addNewChannelSet();
 
-	    Integer actual = ch.getNumChannels();
+	     Integer actual = testChannels.getNumChannels();
 
-	    assertEquals(expected, actual);
-	}
+	     assertEquals(expected, actual,
+	         "getNumChannels() should remain unchanged when multiple time slots are added");
+	 }
 
-	/**
-	 * Test method for {@link edu.uiowa.cs.warp.Channels#getNumChannels()}.
-	 */
-	@Test
-	void testGetNumChannelsUnaffectedByRemoveChannel() {
-	    Channels ch = new Channels(3, false);
-	    int expected = 3;
+	 /**
+	  * Test method for {@link edu.uiowa.cs.warp.Channels#getNumChannels()}.
+	  */
+	 @Test
+	 void testGetNumChannelsUnaffectedByRemoveChannel() {
+	     int expected = 4;
 
-	    ch.addNewChannelSet();
-	    ch.removeChannel(0, "1");
+	     testChannels.addNewChannelSet();
+	     testChannels.removeChannel(0, "1");
 
-	    Integer actual = ch.getNumChannels();
+	     Integer actual = testChannels.getNumChannels();
 
-	    assertEquals(expected, actual);
-	}
+	     assertEquals(expected, actual,
+	         "getNumChannels() should remain unchanged after removing a channel from a time slot");
+	 }
 
 }
