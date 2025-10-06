@@ -27,6 +27,9 @@ import org.junit.jupiter.api.Test;
  * maxFlowLength(),
  * getFlowDeadline(),
  * getNodeNamesOrderedAlphabetically()
+ * 
+ * @author Benjamin Kleiman
+ * Oct 3, 2025
  */
 class WorkLoadTest {
 	
