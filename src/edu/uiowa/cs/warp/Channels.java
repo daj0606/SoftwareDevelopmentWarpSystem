@@ -39,9 +39,13 @@ public class Channels {
     this.channelsAvailable = new ArrayList<ChannelSet>();
   }
 
-  public HashSet<String> getChannelSet(Integer timeSlot) {
+	/*
+	 * FIX: Previously returned a copy (new HashSet<>(...)),
+	 * which caused removals to be lost and could lead to channel conflicts.
+	 */
+  public HashSet<String> getChannelSet(int timeSlot) {
     /* get the channel set for this timeSlot */
-    HashSet<String> channelSet = new HashSet<String>(channelsAvailable.get(timeSlot));
+    HashSet<String> channelSet = channelsAvailable.get(timeSlot);
     return channelSet;
   }
 
@@ -50,7 +54,6 @@ public class Channels {
     channelsAvailable.add(channels);
   }
 
-
   public Boolean isEmpty(int timeSlot) {
     ChannelSet channelSet = channelsAvailable.get(timeSlot); // get the channel set for this
                                                              // timeSlot
@@ -58,6 +61,7 @@ public class Channels {
   }
 
   public Boolean removeChannel(int timeSlot, String channel) {
+	// Objects.requireNonNull(channel, "channel must not be null");
     Boolean result;
     ChannelSet channels = channelsAvailable.get(timeSlot);
     result = channels.remove(channel);
@@ -67,7 +71,7 @@ public class Channels {
   public Boolean addChannel(int timeSlot, String channel) {
     Boolean result;
     ChannelSet channels = channelsAvailable.get(timeSlot); // get a pointer to the channel set
-    result = channels.add(channel); // remove the channel, returning the result
+    result = channels.add(channel); // add the channel, returning the result
     return result;
   }
 
