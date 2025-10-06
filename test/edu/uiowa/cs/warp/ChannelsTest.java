@@ -27,10 +27,7 @@ class ChannelsTest {
 
 	//********* Get Channel Set tests **********//
 	
-	@Test()
-	void testGetChannelSet() {
-		fail("Not yet implemented");
-	}
+	
 	@Test
 	void testGetChannelSet_returnsExpectedSet() {
 		// duplicates ("B","B") collapse in the returned HashSet
@@ -53,7 +50,7 @@ class ChannelsTest {
 		// channelsAvailable.get(missing) -> IndexOutOfBoundsException
 		assertThrows(IndexOutOfBoundsException.class, () -> channels.getChannelSet(10));
 	}
-
+	
 	//********* Add New Channels tests**********//
 	private static java.util.Set<String> defaultNames(int n) {
 		  java.util.Set<String> s = new java.util.HashSet<>();
