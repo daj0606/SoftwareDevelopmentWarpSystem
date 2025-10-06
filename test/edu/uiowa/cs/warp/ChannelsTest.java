@@ -144,24 +144,159 @@ class ChannelsTest {
 		}
 
 	//********* Remove Channel tests **********//
-	@Disabled("TODO")
-	@Test
-	void testRemoveChannel() {
-		fail("Not yet implemented");
-	}
+		@Test
+		void testRemoveChannel_removesExistingDefault() {
+		  Channels c = new Channels(4, false);
+		  c.addNewChannelSet();                 // slot 0 has "0","1","2","3"
+		  int before = c.getChannelSet(0).size();
+
+		  c.removeChannel(0, "2");
+
+		  assertFalse(c.getChannelSet(0).contains("2"), "channel '2' should be removed");
+		  assertEquals(before - 1, c.getChannelSet(0).size(), "size should decrease by 1");
+		}
+
+		@Test
+		void testRemoveChannel_removesCustomChannel() {
+		  Channels c = new Channels(4, false);
+		  c.addNewChannelSet();                 // slot 0 defaults
+		  c.addChannel(0, "A");
+		  assertTrue(c.getChannelSet(0).contains("A"));
+
+		  c.removeChannel(0, "A");
+
+		  assertFalse(c.getChannelSet(0).contains("A"), "custom channel 'A' should be removed");
+		  assertEquals(4, c.getChannelSet(0).size(), "back to defaults count");
+		}
+
+		@Test
+		void testRemoveChannel_nonExistingIsNoOp() {
+		  Channels c = new Channels(4, false);
+		  c.addNewChannelSet();                 // slot 0 defaults
+		  int before = c.getChannelSet(0).size();
+
+		  // Should not throw and should not change contents
+		  c.removeChannel(0, "Q");             // "Q" was never added
+
+		  assertEquals(before, c.getChannelSet(0).size(), "size should be unchanged");
+		  assertFalse(c.getChannelSet(0).contains("Q"));
+		}
+
+		@Test
+		void testRemoveChannel_affectsOnlySpecifiedSlot() {
+		  Channels c = new Channels(4, false);
+		  c.addNewChannelSet();                 // slot 0
+		  c.addNewChannelSet();                 // slot 1
+
+		  c.addChannel(0, "A");
+		  c.addChannel(1, "B");
+
+		  c.removeChannel(0, "A");
+
+		  assertFalse(c.getChannelSet(0).contains("A"), "slot 0 should not have A");
+		  assertTrue(c.getChannelSet(1).contains("B"),  "slot 1 should still have B");
+		}
+
+		@Test
+		void testRemoveChannel_missingSlot_throws() {
+		  Channels c = new Channels(4, false);
+		  // No sets created yet → any index is out of range
+		  assertThrows(IndexOutOfBoundsException.class, () -> c.removeChannel(0, "A"));
+		}
 
 	//********* Add Channel tests **********//
-	@Disabled("TODO")
-	@Test
-	void testAddChannel() {
-		fail("Not yet implemented");
-	}
+		@Test
+		void testAddChannel_newIncrementsSize() {
+		  Channels c = new Channels(4, false);
+		  c.addNewChannelSet();                 // slot 0 has "0","1","2","3"
+
+		  int before = c.getChannelSet(0).size();
+		  assertFalse(c.getChannelSet(0).contains("A"));
+
+		  c.addChannel(0, "A");
+
+		  assertTrue(c.getChannelSet(0).contains("A"));
+		  assertEquals(before + 1, c.getChannelSet(0).size());
+		}
+
+		@Test
+		void testAddChannel_duplicateDoesNotChangeSize() {
+		  Channels c = new Channels(4, false);
+		  c.addNewChannelSet();                 // slot 0
+
+		  c.addChannel(0, "A");
+		  int before = c.getChannelSet(0).size();
+
+		  c.addChannel(0, "A");                 // duplicate
+		  assertEquals(before, c.getChannelSet(0).size(),
+		      "Adding a duplicate should not change size");
+		}
+
+		@Test
+		void testAddChannel_existingDefaultDoesNotChangeSize() {
+		  Channels c = new Channels(4, false);
+		  c.addNewChannelSet();                 // slot 0 has "2" already
+
+		  int before = c.getChannelSet(0).size();
+		  c.addChannel(0, "2");                 // already present by default
+
+		  assertTrue(c.getChannelSet(0).contains("2"));
+		  assertEquals(before, c.getChannelSet(0).size());
+		}
+
+		@Test
+		void testAddChannel_affectsOnlySpecifiedSlot() {
+		  Channels c = new Channels(4, false);
+		  c.addNewChannelSet();                 // slot 0
+		  c.addNewChannelSet();                 // slot 1
+
+		  c.addChannel(0, "A");
+
+		  assertTrue(c.getChannelSet(0).contains("A"));
+		  assertFalse(c.getChannelSet(1).contains("A"));
+		}
+
+		@Test
+		void testAddChannel_missingSlot_throws() {
+		  Channels c = new Channels(4, false);
+		  // no sets created → any index is out of range
+		  assertThrows(IndexOutOfBoundsException.class, () -> c.addChannel(0, "A"));
+		}
 
 	//********* Get Num Channels tests **********//
-	@Disabled("TODO")
-	@Test
-	void testGetNumChannels() {
-		fail("Not yet implemented");
-	}
+		@Test
+		void testGetNumChannels_returnsConstructorValue() {
+		  Channels c = new Channels(4, false);
+		  assertEquals(4, c.getNumChannels());
+		}
+
+		@Test
+		void testGetNumChannels_doesNotChangeOnAddsOrRemoves() {
+		  Channels c = new Channels(4, false);
+		  c.addNewChannelSet();       // create slot 0 (prepopulated)
+		  c.addChannel(0, "A");
+		  c.removeChannel(0, "2");
+		  assertEquals(4, c.getNumChannels(), "capacity should stay equal to nChannels");
+		}
+		
+		@Test
+		void testPerSlotCount_increasesByOneOnNewChannel() {
+		  Channels c = new Channels(4, false);
+		  c.addNewChannelSet();                 // slot 0
+		  int before = c.getChannelSet(0).size();
+
+		  c.addChannel(0, "A");
+		  assertEquals(before + 1, c.getChannelSet(0).size());
+		}
+
+		@Test
+		void testPerSlotCount_decreasesOnRemoveExisting() {
+		  Channels c = new Channels(4, false);
+		  c.addNewChannelSet();                 // slot 0 has "2" by default
+		  int before = c.getChannelSet(0).size();
+
+		  c.removeChannel(0, "2");
+		  assertEquals(before - 1, c.getChannelSet(0).size());
+		}
 
 }
