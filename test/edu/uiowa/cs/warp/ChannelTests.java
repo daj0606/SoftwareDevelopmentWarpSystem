@@ -12,7 +12,17 @@ import org.junit.jupiter.api.Test;
 /**
  * @author Dallas Jackson
  * Oct 3, 2025
+ *
+ * Tests the following methods in Channels.java:  
+ * 
+ * getChannelSet()
+ * addNewChannelSet()
+ * isEmpty()
+ * removeChannel()
+ * addChannel()
+ * getNumChannels()
  */
+
 class ChannelTests {
 	
 	private Channels testChannels;
@@ -402,21 +412,7 @@ class ChannelTests {
 		
 	    assertThrows(IndexOutOfBoundsException.class,
 	        () -> testChannels.removeChannel(99, "0"));
-	}
-
-	/**
-	 * Test method for {@link edu.uiowa.cs.warp.Channels#removeChannel(int, java.lang.String)}.
-	 * (Use this if nulls are DISALLOWED with Objects.requireNonNull)
-	 */
-	/*
-	 * Do not know how to treat null timeslots.
-	 * @Test void testRemoveChannelNullTimeSlotThrows() {
-	 * testChannels.addNewChannelSet();
-	 * 
-	 * assertThrows(NullPointerException.class, () -> testChannels.removeChannel(0,
-	 * null)); }
-	 */
-		
+	}	
 	
 	/**
 	 * Test method for {@link edu.uiowa.cs.warp.Channels#addChannel(int, java.lang.String)}.
@@ -501,29 +497,16 @@ class ChannelTests {
 	 * Test method for {@link edu.uiowa.cs.warp.Channels#addChannel(int, java.lang.String)}.
 	 * (Use this if nulls are ALLOWED)
 	 */
-	/*
-	 * @Test void testAddChannelNullAllowedReturnsTrueFirstTime() {
-	 * testChannels.addNewChannelSet();
-	 * 
-	 * Boolean added = testChannels.addChannel(0, null); Set<String> actual =
-	 * testChannels.getChannelSet(0);
-	 * 
-	 * assertTrue(added,
-	 * "HashSet.add(null) should return true if null not present");
-	 * assertTrue(actual.contains(null), "Set should contain null after add"); }
-	 */
-
-	/**
-	 * Test method for {@link edu.uiowa.cs.warp.Channels#addChannel(int, java.lang.String)}.
-	 * (Use this if nulls are DISALLOWED with Objects.requireNonNull)
-	 */
-	/*
-	 * @Test void testAddChannelNullDisallowedThrows() {
-	 * testChannels.addNewChannelSet();
-	 * 
-	 * assertThrows(NullPointerException.class, () -> testChannels.addChannel(0,
-	 * null)); }
-	 */
+	 @Test void testAddChannelNullAllowedReturnsTrueFirstTime() {
+		 testChannels.addNewChannelSet();
+		 
+		 Boolean added = testChannels.addChannel(0, null); Set<String> actual =
+		 testChannels.getChannelSet(0);
+		 
+		 assertTrue(added,
+		 "HashSet.add(null) should return true if null not present");
+		 assertTrue(actual.contains(null), "Set should contain null after add"); 
+	 }
 
 	/**
 	 * Test method for {@link edu.uiowa.cs.warp.Channels#getNumChannels()}.
