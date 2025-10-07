@@ -28,3 +28,9 @@ Problem Description:
 
 How We Found The Issue:**
     We tried many different syntax formats to define a node with a channel, such as `A : 1;`, `A (1);`, and `A : (1)`. All of these attempts caused different parsing errors.
+
+There were potential errors in Channels.java, however we were not able to find them. 
+Notable Edge Cases Covered:
+Missing slot for getChannelSet, isEmpty, addChannel, removeChannel → throws.
+Defensive copy proof: mutate returned set, then fetch again (unchanged).
+Duplicate adds / removes of non-existent entries don’t change size.

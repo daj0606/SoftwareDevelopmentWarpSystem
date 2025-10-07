@@ -26,10 +26,12 @@ class ChannelsTest {
 		channels = new Channels(4, false);
 	}
 	/**
-	 * Builds the expected default channel names: "0","1",...,"n-1".
+	 * Builds the expected default channel names for a time slot: "0","1",...,"n-1".
 	 * 
-	 * @param n
-	 * @return
+	 * @param n the capacity (number of default channels) to generate.
+ *          For example, n=4 produces {"0","1","2","3"}.
+	 * @return a new Set<String> containing the strings "0" through "n-1".
+ *         Never null; empty if n <= 0.
 	 */
 	private static java.util.Set<String> defaultNames(int n) {
 		java.util.Set<String> s = new java.util.HashSet<>();
@@ -104,8 +106,6 @@ class ChannelsTest {
 	}
 
 	//********* Add New Channels tests**********//
-
-	// -------- Add New Channels tests (no streams) --------
 
 	/**
 	 * GIVEN a fresh Channels(n=4),
