@@ -13,9 +13,7 @@ package edu.uiowa.cs.warp;
  *
  */
 public class ChannelAnalysis {
-  /**
-   * Program obtained from warp interface.
-   */
+   
   private Program program;
   
   /**
@@ -52,4 +50,12 @@ public class ChannelAnalysis {
   public Boolean isChannelConflict() {
     return conflictExists;
   }
+  
+  /**
+   * Program obtained from warp interface.
+   */
+public ProgramSchedule getChannelAnalysisTable() {
+      // TODO implement this operation
+      throw new UnsupportedOperationException("not implemented");
+   }
 }

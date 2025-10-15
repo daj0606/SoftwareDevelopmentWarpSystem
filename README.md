@@ -34,3 +34,6 @@ Notable Edge Cases Covered:
 Missing slot for getChannelSet, isEmpty, addChannel, removeChannel → throws.
 Defensive copy proof: mutate returned set, then fetch again (unchanged).
 Duplicate adds / removes of non-existent entries don’t change size.
+#HW4
+Added UML Diagrams for the Channel associated classes, 'Visualization.java', and 'WorkLoad.java'.
+Performed Reverse engineering with ChannelAnalysis to build getChannelAnalysisTable(). Used update class path method in diagram window, as I was not prompted by to reverse engineer on re-launch.

@@ -20,12 +20,11 @@ import javax.swing.JMenuItem;
  * @version 2.0 Fall 2025
  */
 public class InputFileMenu {
-
-  private static String MENU_NAME = "Input File"; // or File?
+public static String MENU_NAME = "Input File"; // or File?
   private static String OPEN = "Open";
   private static String CREATE = "Create";
   private static String SAVE = "Save";
-  private static String SAVE_AS = "SaveAs";
+public static String SAVE_AS = "SaveAs";
 
   private JMenu fileMenu;
   private JMenuItem openItem;

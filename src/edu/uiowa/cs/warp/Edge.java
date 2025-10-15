@@ -12,7 +12,7 @@ public class Edge extends SchedulableObject implements Comparable<Edge> {
 	private EdgeState state;
 	private Integer numTx;
 
-	private enum EdgeState {
+	private enum EdgeState() {
 		RELEASED, EXECUTING, NOT_READY 
 	}
 
