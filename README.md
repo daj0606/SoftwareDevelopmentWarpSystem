@@ -10,6 +10,8 @@ HW3 - Dallas Jackson: Created JUnit tests for all the required methods in Channe
 
 HW3 - Benjamin Kleiman: Created JUnit tests for all the required methods in WorkLoad.java. No errors were encountered. 
 
+HW4 - Dallas Jackson: Added UML models Visualizaiton.uml, Workload.uml, and Channel.uml, also added getChannelAnalysisTable method to ChannelAnalysis
+
 This version 2.0 code base will be used for the University of Iowa 
 CS 2820 Introduction to Software Development course. The code was 
 developed by Steve Goddard for the WARP sensor network research project. 
