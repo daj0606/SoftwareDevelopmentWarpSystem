@@ -11,12 +11,12 @@ import java.io.File;
 public interface Visualizable {
 
   /** Enumeration class defining the types of Warp system visualizations possible. */
-  public enum SystemVisualizations() {
+  public enum SystemVisualizations {
     SOURCE, RELIABILITIES, SIMULATOR_INPUT, LATENCY, LATENCY_REPORT, DEADLINE_REPORT, CHANNEL, EXECUTION
   }
 
   /** Enumeration class defining the types of Warp workload visualizations possible. */
-  public enum WorkLoadVisualizations() {
+  public enum WorkLoadVisualizations {
     INPUT_GRAPH, COMUNICATION_GRAPH, GRAPHVIZ, NETWORK
   }
 

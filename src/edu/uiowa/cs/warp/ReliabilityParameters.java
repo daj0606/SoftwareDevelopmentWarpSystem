@@ -9,7 +9,7 @@ package edu.uiowa.cs.warp;
  */
 interface ReliabilityParameters {
 
-  public enum FaultModel() {
+  public enum FaultModel {
     FIXED, PROBABILISTIC
   }
   
