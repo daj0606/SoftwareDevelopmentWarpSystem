@@ -37,3 +37,6 @@ Duplicate adds / removes of non-existent entries don’t change size.
 #HW4
 Added UML Diagrams for the Channel associated classes, 'Visualization.java', and 'WorkLoad.java'.
 Performed Reverse engineering with ChannelAnalysis to build getChannelAnalysisTable(). Used update class path method in diagram window, as I was not prompted by to reverse engineer on re-launch.
+#HW5
+Refactored the method findNextAvailableChannel in Program.java, reducing method length and duplicate code. Created a helper method to remove unavailable channels from the pool of potential options. Added Javadoc comments to both the findNextAvailableChannel method and helper method. Created patched for updated code in UML diagrams. Screenshots of a closeup Program.java and and overall view of the UML diagram are stored in the UML_LAB folder.
+Assignment was completed via pair programming between Sean Mukunza and Dallas Jackson.

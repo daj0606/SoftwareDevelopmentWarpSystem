@@ -1036,10 +1036,20 @@ public class Program implements SystemAttributes {
 		return vacantSlot;
 	}
 
-
+/**
+ * Finds next available channel and returns the name of that channel. If no channel was available will return UNKNOWN.
+ * Caller will need to verify.
+ * 
+ * @param schedule for the whole program
+ * @param nodeName name of the current node
+ * @param currentTime current valid time of the program
+ * @param srcNodeIndex the current index of src node
+ * @param snkNodeIndex the current index of the snk node
+ * @return name of the next available channel as a string
+ */
 	private String findNextAvailableChannel(ProgramSchedule schedule, String nodeName, Integer currentTime,
 			Integer srcNodeIndex, Integer snkNodeIndex) {
-		// indicates no channel was available. **Add caller needs to check to javadoc**
+		// indicates no channel was available. 
 		var newChannel = UNKNOWN; 
 		
 		// create an instance of the Warp DSL class for parsing instructions
@@ -1095,6 +1105,12 @@ public class Program implements SystemAttributes {
 		
 	}
 	
+	/**
+	 * Helper function to remove unavailable channels based on instruction parameters.
+	 * 
+	 * @param InstructionParametersArrayList list of instruction parameters
+	 * @param channels set of channels for the current timeslot
+	 */
 	public void removeChannelFromParam(ArrayList<InstructionParameters> InstructionParametersArrayList, HashSet<String> channels) {
 		for (int i = 0; i < InstructionParametersArrayList.size(); i++) {
 			//get a copy of the parameters
