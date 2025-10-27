@@ -22,7 +22,7 @@ import javax.swing.JMenuItem;
 public class OptionsMenu {
 
   private static String MENU_NAME = "Options";
-  private static String SHOW_OPTIONS = "Show Options";
+public static String SHOW_OPTIONS = "Show Options";
   private static String EDIT_OPTIONS = "Edit Options";
   private JMenuItem editOptionsMenuItem = null;
   private JMenuItem showOptionsMenuItem = null;  

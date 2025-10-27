@@ -35,6 +35,7 @@ import edu.uiowa.cs.warp.Visualizable.SystemVisualizations;
  *
  */
 public class Warp {
+<<<<<<< HEAD
 	/**
 	 * Global options parsed from command-line arguments and used to configure
 	 * workload construction, scheduler choice, visualization selection, and verbosity.
@@ -53,7 +54,15 @@ public class Warp {
 		verifyReliabilities(warp);
 		verifyNoChannelConflicts(warp);
 	}
+=======
+  
+  /**
+   * Global options that configure WARP execution, visualization, and output.
+   */
+  private static Options warpOptions;
+>>>>>>> branch 'HW5' of https://research-git.uiowa.edu/smukunza/cs2820-smukunza
 
+<<<<<<< HEAD
 	/**
 	 * Verifies that all end-to-end message transmissions reliabilities were met.
 	 * 
@@ -82,6 +91,19 @@ public class Warp {
 			}
 		}
 	}
+=======
+  /**
+   * Verifies that all deadlines are met, end-to-end message transmission
+   * reliabilities are met, and no channel conflicts exist in the Warp
+   * programs that schedule message flow transmissions.
+   * @param warp the WARP system instance to verify
+   */
+  private static void verifyPerformanceRequirements(WarpInterface warp) {
+    verifyDeadlines(warp);
+    verifyReliabilities(warp);
+    verifyNoChannelConflicts(warp);
+  }
+>>>>>>> branch 'HW5' of https://research-git.uiowa.edu/smukunza/cs2820-smukunza
 
 	/**
 	 * Verifies that all deadlines are met. A deadline is missed if the time it

@@ -19,10 +19,26 @@ import edu.uiowa.cs.warp.ReliabilityParameters.FaultModel;
  *
  */
 abstract class Visualization implements Visualizable {
-
+	
+  /**
+   * Empty string place holder for unretrieved data.
+   */
   protected static final String EMPTY = "";
+  
+  /**
+   * Constant used to validate access to file. 
+   * If file name is not found or invalid store "UNKNOWN" as a placeholder.
+   */
   protected static final String UNKNOWN = "UNKNOWN";
+  
+  /**
+   * 2 dimensional array that stores visualization data.
+   */
   protected String[][] visualizationData;
+  
+  /**
+   * Stores configuration settings used to generate visualization.
+   */
   protected Options options;
   
   private static final String NOT_IMPLEMENTED = "This visualization has not been implemented.";
