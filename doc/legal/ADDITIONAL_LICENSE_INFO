@@ -1,3 +1,4 @@
+<<<<<<< HEAD
                       ADDITIONAL INFORMATION ABOUT LICENSING
 
 Certain files distributed by Oracle America, Inc. and/or its affiliates are 
@@ -35,3 +36,6 @@ Proceed with caution and we recommend that you obtain the advice of a lawyer
 skilled in open source matters before removing the Classpath Exception or 
 making modifications to this package which may subsequently be redistributed 
 and/or involve the use of third party software.
+=======
+Please see ..\java.base\ADDITIONAL_LICENSE_INFO
+>>>>>>> branch 'HW5' of https://research-git.uiowa.edu/smukunza/cs2820-smukunza
