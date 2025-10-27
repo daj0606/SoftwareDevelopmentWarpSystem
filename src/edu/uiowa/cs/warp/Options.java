@@ -492,11 +492,7 @@ public class Options {
   }
  
   private void setDefaultOptions () {
-<<<<<<< HEAD
     this.verboseMode = false;
-=======
-	this.verboseMode = false;
->>>>>>> branch 'HW5' of https://research-git.uiowa.edu/smukunza/cs2820-smukunza
     this.nChannels = NUM_CHANNELS;
     this.minPacketReceptionRate = MIN_PACKET_RECEPTION_RATE;
     this.e2e = E2E;

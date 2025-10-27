@@ -10,7 +10,7 @@ import java.util.HashMap;
 public class LatencyAnalysis {
 
   private static String DEADLINE_MISS = " => DEADLINE MISS";
-public static String FLOW_SEPARATOR = "******************************\n";
+  private static String FLOW_SEPARATOR = "******************************\n";
   private Description latencyReport;
   private Program program;
   private WorkLoad workload;
