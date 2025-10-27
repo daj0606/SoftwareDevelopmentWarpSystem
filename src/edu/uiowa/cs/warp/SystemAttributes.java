@@ -17,9 +17,9 @@ interface SystemAttributes extends ReliabilityParameters{
     //	    CONNECTIVITY_POSET_PREEMPTIVE_PRIORITY, 
     //	    CONNECTIVITY_POSET_PREEMPTIVE_RM,
     //	    CONNECTIVITY_POSET_PREEMPTIVE_DM	
-	  
+
     private final String description;
-  
+
     ScheduleChoices(String description) {
       this.description = description;
     }
