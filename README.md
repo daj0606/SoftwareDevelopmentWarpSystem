@@ -12,6 +12,9 @@ HW3 - Benjamin Kleiman: Created JUnit tests for all the required methods in Work
 
 HW4 - Dallas Jackson: Added UML models Visualizaiton.uml, Workload.uml, and Channel.uml, also added getChannelAnalysisTable method to ChannelAnalysis
 
+HW5 - Refactored the method findNextAvailableChannel in Program.java, reducing method length and duplicate code. Created a helper method to remove unavailable channels from the pool of potential options. Added Javadoc comments to both the findNextAvailableChannel method and helper method. Created patched for updated code in UML diagrams. Screenshots of a closeup Program.java and and overall view of the UML diagram are stored in the UML_LAB folder.
+Assignment was completed via pair programming between Sean Mukunza and Dallas Jackson.
+
 This version 2.0 code base will be used for the University of Iowa 
 CS 2820 Introduction to Software Development course. The code was 
 developed by Steve Goddard for the WARP sensor network research project. 
