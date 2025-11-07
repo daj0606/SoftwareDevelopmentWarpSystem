@@ -4,11 +4,7 @@ This is Benjamin Kleiman's version of WARP that will be used for CS:2820 in the 
 
 HW2 - Dallas Jackson: Added JavaDoc comments for Warp, Channels, and ChannelAnalysis
 
-HW2 - Benjamin Kleiman: Added JavaDoc comments for ProgramVisualization, VisualizationFactory, and WorkLoad
-
 HW3 - Dallas Jackson: Created JUnit tests for all the required methods in Channels.java. Also fixed the error that was described by the assignment in the getChannelsSet method, which previously returned a copy of the HashSet which could cause removals to be lost and lead to channel conflicts. This code was changed such that instead of returning a copy, it returned the actual object. 
-
-HW3 - Benjamin Kleiman: Created JUnit tests for all the required methods in WorkLoad.java. No errors were encountered. 
 
 HW4 - Dallas Jackson: Added UML models Visualizaiton.uml, Workload.uml, and Channel.uml, also added getChannelAnalysisTable method to ChannelAnalysis
 
