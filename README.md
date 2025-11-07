@@ -1,6 +1,6 @@
 # CS2820 Fall 2025 WARP Project Code
 
-This is Benjamin Kleiman's version of WARP that will be used for CS:2820 in the year 2025.
+This is Dallas Jackson's version of WARP that will be used for CS:2820 in the year 2025.
 
 HW2 - Dallas Jackson: Added JavaDoc comments for Warp, Channels, and ChannelAnalysis
 
